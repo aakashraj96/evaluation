@@ -1,21 +1,22 @@
 function frameScoreCalc(scoreArr, shotNumber, frameNumber) {
-  let max = 1;
+  let max = 2;
   const result = {
     score: 0,
     shots: 0,
   };
   for (let i = shotNumber; i < shotNumber + max; i += 1) {
     result.score += scoreArr[i];
-    if ((result.score === 10) && (i === shotNumber)) {
-      max += 2;
+    if ((result.score === 10) && (i === shotNumber) && (result.shots === 0)) {
+      max += 1;
       result.shots = 1;
-    } else if (i === shotNumber + 1) {
+    } else if ((i === shotNumber + 1) && (result.shots === 0)) {
       result.shots = 2;
       if (result.score === 10) {
         max += 1;
       }
     }
   }
+  // console.log(frameNumber, result.score);
   return result;
 }
 
@@ -27,6 +28,7 @@ function scoreCalc(scoreArr) {
     const frame = frameScoreCalc(scoreArr, i, frameNumber);
     frameNumber += 1;
     score += frame.score;
+
     if (frame.shots === 2) {
       i += 1;
     }
