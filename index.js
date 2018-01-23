@@ -1,19 +1,43 @@
+function checkShots(lastFrameCase, shotNumber, scoreArr) {
+  if ((lastFrameCase === 1) || (lastFrameCase === 2)) {
+    if (scoreArr.length === shotNumber + 3) {
+      return 1;
+    }
+
+    return 0;
+  }
+
+  if (scoreArr.length === shotNumber + 2) {
+    return 1;
+  }
+
+  return 0;
+}
+
 function lastFrame(scoreArr, shotNumber) {
   const result = {
     score: 0,
     shots: 0,
   };
+  let valid = 1;
   if (scoreArr[shotNumber] === 10) {
+    valid = checkShots(1, shotNumber, scoreArr);
     result.score += 10 + scoreArr[shotNumber + 1] + scoreArr[shotNumber + 2];
     result.shots = 1;
   } else if (scoreArr[shotNumber] + scoreArr[shotNumber + 1] === 10) {
+    valid = checkShots(2, shotNumber, scoreArr);
     result.score += 10 + scoreArr[shotNumber + 2];
     result.shots = 2;
   } else {
+    valid = checkShots(3, shotNumber, scoreArr);
     result.score += scoreArr[shotNumber] + scoreArr[shotNumber + 1];
     result.shots = 2;
   }
-  return result;
+  if (valid === 1) {
+    return result;
+  }
+
+  return null;
 }
 
 
@@ -57,7 +81,12 @@ function scoreCalc(scoreArr) {
     }
     const frame = frameScoreCalc(scoreArr, i, frameNumber);
     frameNumber += 1;
-    score += frame.score;
+    if (frame !== null) {
+      score += frame.score;
+    } else {
+      return null;
+    }
+
     if (frame.shots === 2) {
       i += 1;
     }
