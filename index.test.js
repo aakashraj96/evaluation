@@ -45,3 +45,5 @@ describe('testing scoreCalc with empty array', () => {
     expect(scoreCalc([])).toBe(null);
   });
 });
+
+// Should have tested helper functions directly.
