@@ -32,6 +32,9 @@ function frameScoreCalc(scoreArr, shotNumber, frameNumber) {
         max += 1;
         result.shots = 1;
       } else if ((i === shotNumber + 1) && (result.shots === 0)) {
+        if (result.score > 10) {
+          return null;
+        }
         result.shots = 2;
         if (result.score === 10) {
           max += 1;
@@ -49,10 +52,12 @@ function scoreCalc(scoreArr) {
   let frameNumber = 1;
   let score = 0;
   for (let i = 0; i < scoreArr.length && frameNumber <= 10; i += 1) {
+    if (scoreArr[i] > 10) {
+      return null;
+    }
     const frame = frameScoreCalc(scoreArr, i, frameNumber);
     frameNumber += 1;
     score += frame.score;
-
     if (frame.shots === 2) {
       i += 1;
     }

@@ -24,3 +24,12 @@ describe('testing scoreCalc with a strike or spare in the last frame', () => {
     expect(scoreCalc([10, 1, 2, 8, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 8, 2, 2])).toBe(57);
   });
 });
+
+describe('testing scoreCalc with a frame score greater than 10 (without spare and strike bonus)', () => {
+  test('Passing 11, 1, 2, 8, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, expected output: 48', () => {
+    expect(scoreCalc([11, 1, 2, 8, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2])).toBe(null);
+  });
+  test('Passing 11, 1, 2, 8, 2, 1, 2, 8, 3, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, expected output: 48', () => {
+    expect(scoreCalc([11, 1, 2, 8, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2])).toBe(null);
+  });
+});
