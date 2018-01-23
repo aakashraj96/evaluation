@@ -39,3 +39,9 @@ describe('testing scoreCalc with wrong number of shots', () => {
     expect(scoreCalc([10, 1, 2, 8, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2])).toBe(null);
   });
 });
+
+describe('testing scoreCalc with empty array', () => {
+  test('Passing empty array, expected output: null', () => {
+    expect(scoreCalc([])).toBe(null);
+  });
+});

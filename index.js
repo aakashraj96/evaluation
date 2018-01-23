@@ -73,6 +73,9 @@ function frameScoreCalc(scoreArr, shotNumber, frameNumber) {
 
 
 function scoreCalc(scoreArr) {
+  if (scoreArr.length === 0) {
+    return null;
+  }
   let frameNumber = 1;
   let score = 0;
   for (let i = 0; i < scoreArr.length && frameNumber <= 10; i += 1) {
